@@ -1,1 +1,61 @@
-Write up
+## Junior Security Analyst Intro – TryHackMe SOC L1 Path
+
+This room is an introduction to what a Junior SOC Analyst actually does day to day, plus a small practical at the end to get a feel for working in a SIEM and dealing with real alerts.[1]
+
+***
+
+## Understanding the Junior SOC Analyst Role
+
+The first section is simply informative and it starts with the basics: what a L1 analyst does. Alerts triage, improvement of processes and learning new threats.[1]
+
+The second section is understanding the actual team within the company. I can see many advancement options after Junior SOC Analyst. By being within a role like this, I will be not only constantly exposed to cyber but also to all possibilities that are out there that I might enjoy even more. In favor of Blue team!![1]
+
+***
+
+## Mindset Going Into the Practical
+
+There’s a practical at the end. I don’t expect this to be complex, but I’m excited anyway.[1]
+
+In the practical we are faced with a SIEM tool. My goal is to try to role play as best I can to imagine myself with the actual responsibility of being a SOC team member and try and think of every alert and what they mean prior to solving the questions. I will be the one actually seeing how it happens, which is super helpful even for an attacker.[1]
+
+***
+
+## Working Through the SIEM Alerts
+
+Okay, we have two critical alerts. I would be shitting my pants now. Especially now reading that this was an attempt followed by a successful SSH login.[1]
+
+The full alert timeline looks like this:  
+
+- Jan 1st 2026 at 09:47 – Low – Logon Error: The password of "IT Automation" has expired.  
+- Jan 1st 2026 at 09:57 – Medium – Multiple failed login attempts from IT Automation service account.  
+- Jan 1st 2026 at 11:07 – Low – The user John Doe logged in to LPT-JDOE device after 3 failed attempts.  
+- Jan 1st 2026 at 11:53 – Critical – Unauthorized login attempts from IP address 221.181.185.159 to port 22.  
+- Jan 1st 2026 at 11:57 – Critical – Successful SSH login from the suspicious IP address 221.181.185.159.  
+
+The other alerts are regular alerts that show that a password has expired, a user has attempted to login with the expired password, then they were able to login. Now, in terms of priority, of course I would go from most severe to least and then within each severity in chronological order.[1]
+
+***
+
+## Investigating the Critical SSH Alerts
+
+On to the critical first. The key sequence is four minutes of unauthorized login attempts to SSH on port 22 from 221.181.185.159, followed by a successful SSH login from the same IP. This is exactly the kind of thing that would make me nervous as a junior analyst, because it suggests a brute-force or credential stuffing attempt that actually succeeded.[1]
+
+Let’s try to see if this IP is known to be malicious. Using an IP reputation tool (like AbuseIPDB or Cisco Talos-style services), I confirm that 221.181.185.159 is flagged as malicious and involved in 4 cyber attacks, categorized as Port Scan, C2 Server, and PlugX, coming from China Mobile Communications Corporation in China under the domain chinamobile.thm. Now that we know the IP address is malicious, we need to escalate it to a staff member.[1]
+
+***
+
+## Response and Escalation
+
+Given the confirmed malicious reputation and the successful SSH login, this absolutely needs to be treated as a potential compromise. I escalated to my SOC team lead, as this seemed important. In the meantime, let’s block this IP in the firewall, highlighting that this is a known malicious IP that successfully logged in over SSH.[1]
+
+**Conclusion:** this looks like a successful SSH compromise originating from a known malicious IP with C2 and malware associations, so it should be handled as an active incident, not just “someone guessing a password.”
+
+***
+
+## What I Learned From This Room
+
+This room helped me practice prioritizing alerts by severity first and then by time, instead of just clicking through them randomly. It also forced me to think about escalation paths (when to involve a SOC lead) and immediate containment steps like blocking a malicious IP on the firewall.  
+
+Most importantly, it got me into the mindset of actually owning alerts and imagining the real responsibility of sitting in a SOC, instead of just answering multiple-choice questions in isolation.
+
+[1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/117758050/0f794d3c-6392-43a0-a5b1-52f3fc2ca7a9/TryHackMe-_-Junior-Security-Analyst-Intro.html)
