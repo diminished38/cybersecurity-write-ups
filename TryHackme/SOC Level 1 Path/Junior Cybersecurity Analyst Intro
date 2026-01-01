@@ -14,7 +14,7 @@ The second section is understanding the actual team within the company. I can se
 
 ## Mindset Going Into the Practical
 
-There’s a practical at the end. I don’t expect this to be complex, but I’m excited anyway.[file:49]
+There’s a practical at the end. I don’t expect this to be complex, but I’m excited anyway.
 
 In the practical we are faced with a SIEM tool. My goal is to try to role play as best I can to imagine myself with the actual responsibility of being a SOC team member and try and think of every alert and what they mean prior to solving the questions. I will be the one actually seeing how it happens, which is super helpful even for an attacker.
 
@@ -45,7 +45,7 @@ To dig deeper, I used an IP reputation-style check. The IP `221.181.185.159` is 
 
 ## Response and Escalation
 
-Given the confirmed malicious reputation and the successful SSH login, this absolutely needs to be treated as a potential compromise. I escalated to my SOC team lead, as this seemed important. In the meantime, let’s block this IP in the firewall, highlighting that this is a known malicious IP that successfully logged in over SSH.[file:49]
+Given the confirmed malicious reputation and the successful SSH login, this absolutely needs to be treated as a potential compromise. I escalated to my SOC team lead, as this seemed important. In the meantime, let’s block this IP in the firewall, highlighting that this is a known malicious IP that successfully logged in over SSH.
 
 **Conclusion:** this looks like a successful SSH compromise originating from a known malicious IP with C2 and malware associations, so it should be handled as an active incident, not just “someone guessing a password.”
 
